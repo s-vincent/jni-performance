@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.github.s-vincent</groupId>
+    <artifactId>jni-performance</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../../</relativePath>
+  </parent>
+
+  <artifactId>libjperformance</artifactId>
+  <packaging>so</packaging>
+  <version>1.0-SNAPSHOT</version>
+
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <name>libjperformance</name>
+  <url>http://maven.apache.org</url>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>native-maven-plugin</artifactId>
+        <version>1.0-alpha-9</version>
+        <extensions>true</extensions>
+
+        <configuration>
+          <compilerProvider>generic-classic</compilerProvider>
+          <compilerExecutable>gcc</compilerExecutable>
+          <linkerExecutable>gcc</linkerExecutable>
+          <sources>
+            <source>
+              <directory>src/main/cpp/performance/src</directory>
+              <fileNames>
+                <fileName>performance_Print.c</fileName>
+                <fileName>performance_CacheID.c</fileName>
+                <fileName>performance_Array.c</fileName>
+              </fileNames>
+            </source>
+          </sources>
+
+          <compilerStartOptions>
+            <compilerStartOption>-I ${JAVA_HOME}/include</compilerStartOption>
+            <compilerStartOption>-I ${JAVA_HOME}/include/linux</compilerStartOption>
+            <compilerStartOption>-I ./src/main/cpp/performance/include</compilerStartOption>
+            <compilerStartOption>-fPIC</compilerStartOption>
+          </compilerStartOptions>
+          <linkerStartOptions>
+            <linkerStartOption>-L ${JAVA_HOME}/lib</linkerStartOption>
+          </linkerStartOptions>
+          <linkerEndOptions>
+            <linkerEndOption>-shared</linkerEndOption>
+            <linkerEndOption>-fPIC</linkerEndOption>
+          </linkerEndOptions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <licenses>
+    <license>
+      <name>BSD 3-Clause License</name>
+      <url>https://opensource.org/licenses/BSD-3-Clause</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <organization>
+    <name>Sebastien Vincent</name>
+    <url>http://github.com/s-vincent/</url>
+  </organization>
+</project>
+
