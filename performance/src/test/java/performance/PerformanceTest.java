@@ -13,10 +13,10 @@ import junit.framework.*;
 public class PerformanceTest extends TestCase
 {
     public void testPrint()
-	{
+    {
         Print ep = new Print();
 
-		ep.printHello();
+        ep.printHello();
     }
 }
 
